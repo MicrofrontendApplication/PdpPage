@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import federation from '@originjs/vite-plugin-federation'
 
 export default defineConfig({
+
   plugins: [
     react(),
     federation({
@@ -14,7 +15,9 @@ export default defineConfig({
      shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],
-  
+    server: {
+    cors: true,
+  },
   build: {
     modulePreload: false,
     target: 'esnext',
