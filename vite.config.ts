@@ -15,10 +15,7 @@ export default defineConfig({
      shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],
-    server: {
-    cors: false,
-     origin: 'http://localhost:5003',
-  },
+   
   build: {
     modulePreload: false,
     target: 'esnext',
