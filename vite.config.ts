@@ -16,7 +16,7 @@ export default defineConfig({
     }),
   ],
     server: {
-    cors: true,
+    cors: false,
   },
   build: {
     modulePreload: false,
