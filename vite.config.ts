@@ -17,6 +17,7 @@ export default defineConfig({
   ],
     server: {
     cors: false,
+     origin: 'http://localhost:5003',
   },
   build: {
     modulePreload: false,
