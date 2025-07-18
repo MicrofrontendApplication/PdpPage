@@ -13,7 +13,8 @@
    "@originjs/vite-plugin-federation": "^1.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.1"
+    "react-router-dom": "^6.30.1",
+    "microfrontend": "file:./libs/microfrontend-0.0.244.tgz"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

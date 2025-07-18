@@ -12,7 +12,11 @@ export default defineConfig({
       exposes: {
         './PdpPage': './src/App.tsx',
       },
-     shared: ['react', 'react-dom', 'react-router-dom'],
+     shared: {
+        react: { singleton: true, eager: true },
+        'react-dom': { singleton: true, eager: true },
+        'react-router-dom': { singleton: true, eager: true }
+      }as any,
     }),
   ],
    
@@ -20,6 +24,7 @@ export default defineConfig({
     modulePreload: false,
     target: 'esnext',
     minify: false,
-    cssCodeSplit: false,
+    cssCodeSplit:true,
+   
   }
 })
