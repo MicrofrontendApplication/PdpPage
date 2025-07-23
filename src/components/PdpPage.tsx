@@ -1,3 +1,4 @@
+import { Button } from "microfrontend";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -38,6 +39,7 @@ const PdpPage: React.FC = () => {
       <p><strong>Price:</strong> ${product.price}</p>
       <p><strong>Brand:</strong> {product.brand}</p>
       <p><strong>Category:</strong> {product.category}</p>
+      <Button>add to cart</Button>
     </div>
   );
 };

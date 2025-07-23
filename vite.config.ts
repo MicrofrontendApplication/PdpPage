@@ -12,19 +12,16 @@ export default defineConfig({
       exposes: {
         './PdpPage': './src/App.tsx',
       },
-     shared: {
-        react: { singleton: true, eager: true },
-        'react-dom': { singleton: true, eager: true },
-        'react-router-dom': { singleton: true, eager: true }
-      }as any,
+      shared: ['react', 'react-dom', 'react-router-dom'],
     }),
   ],
-   
+     server:{
+    cors:true
+  },
   build: {
     modulePreload: false,
     target: 'esnext',
     minify: false,
-    cssCodeSplit:true,
-   
+    // cssCodeSplit: true,
   }
 })
