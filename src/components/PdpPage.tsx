@@ -2,7 +2,11 @@ import { Button } from "microfrontend";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, increaseQuantity, decreaseQuantity } from "../store/createSlice";
+import {
+  addToCart,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../store/createSlice";
 import { RootState } from "../store/store"; // adjust path as per your project
 
 interface Product {
@@ -30,10 +34,25 @@ const PdpPage: React.FC = () => {
     if (productId) {
       fetch(`https://dummyjson.com/products/${productId}`)
         .then((res) => res.json())
-        .then((data) => setProduct(data));
+        .then((data) => {
+          setProduct(data);
+
+          // 🔹 Dispatch view_product event once product is fetched
+          const event = new CustomEvent("view_product", {
+            detail: {
+              action: "view_product",
+              id: data.id,
+              name: data.title,
+              category: data.category,
+              brand: data.brand,
+              price: data.price,
+              image: data.images?.[0],
+            },
+          });
+          document.dispatchEvent(event);
+        });
     }
   }, [productId]);
-
   if (!product) return <div>Loading product...</div>;
 
   const handleAddToCart = () => {
@@ -57,16 +76,35 @@ const PdpPage: React.FC = () => {
 
   const handleIncrease = () => {
     dispatch(increaseQuantity(product.id));
-    document.dispatchEvent(new CustomEvent("cartUpdated", {
-      detail: { action: "increase_quantity", productId: product.id }
-    }));
+    document.dispatchEvent(
+      new CustomEvent("cartUpdated", {
+        detail: {
+          action: "increase_quantity",
+          productId: product.id,
+          id: product.id,
+          name: product.title,
+          category: product.category,
+          brand: product.brand,
+          price: product.price,
+        },
+      })
+    );
   };
 
   const handleDecrease = () => {
     dispatch(decreaseQuantity(product.id));
-    document.dispatchEvent(new CustomEvent("cartUpdated", {
-      detail: { action: "decrease_quantity", productId: product.id }
-    }));
+    document.dispatchEvent(
+      new CustomEvent("cartUpdated", {
+        detail: {
+          action: "decrease_quantity",
+          productId: product.id,
+          name: product.title,
+          category: product.category,
+          brand: product.brand,
+          price: product.price,
+        },
+      })
+    );
   };
 
   return (
